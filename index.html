@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="더바른한끼 소문난찐빵&손만두. 메뉴 소개, 매장 소식 및 창업 안내."
+  >
+
+  <title>더바른한끼 | 소문난찐빵&손만두</title>
+
+  <link rel="stylesheet" href="./style.css?v=6">
+  <script src="./script.js?v=6" defer></script>
+
+  <style>
+    /* 추가 영역 */
+    .new-section {
+      border-top: 1px solid var(--line);
+    }
+
+    .section-heading {
+      margin-bottom: 36px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 0;
+    }
+
+    .opening-grid,
+    .review-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px;
+    }
+
+    /* 자료 등록 전 카드 틀 */
+    .opening-card,
+    .review-card {
+      min-width: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #1b1c18;
+    }
+
+    .opening-placeholder {
+      position: relative;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 75% 20%,
+          rgba(247, 128, 50, 0.08),
+          transparent 65%
+        ),
+        #22231d;
+    }
+
+    .opening-placeholder::before {
+      width: 80px;
+      height: 60px;
+      border: 1px solid #575544;
+      border-top: 6px solid #756345;
+      content: "";
+    }
+
+    .opening-info {
+      padding: 25px;
+    }
+
+    .placeholder-line {
+      height: 9px;
+      margin-top: 14px;
+      background: #34362b;
+    }
+
+    .placeholder-line:first-child {
+      margin-top: 0;
+    }
+
+    .placeholder-line.short {
+      width: 35%;
+      background: #4b4231;
+    }
+
+    .placeholder-line.medium {
+      width: 68%;
+    }
+
+    .placeholder-line.long {
+      width: 90%;
+    }
+
+    .review-card {
+      padding: 28px;
+    }
+
+    .review-quote {
+      display: block;
+      height: 48px;
+      color: #8d704a;
+      font: 70px/1 Georgia, serif;
+    }
+
+    .review-photo-placeholder {
+      height: 150px;
+      margin: 26px 0 20px;
+      background: #25271f;
+    }
+
+    /* 영상 */
+    .film-section {
+      background: #1b1c18;
+      text-align: center;
+    }
+
+    .film-frame {
+      width: 100%;
+      margin: 36px auto 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      background: #080907;
+    }
+
+    .film-frame video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 76svh;
+      margin: auto;
+      background: #080907;
+      object-fit: contain;
+    }
+
+    /* 사용하지 않는 안내 UI */
+    .film-toolbar,
+    .motion-control {
+      display: none !important;
+    }
+
+    .rail {
+      scrollbar-width: none;
+    }
+
+    .rail::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* 창업 비용 */
+    .cost-section {
+      background: #191a16;
+    }
+
+    .cost-layout {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: start;
+      gap: 50px;
+      margin-top: 38px;
+    }
+
+    .cost-summary {
+      padding: 28px;
+      border-top: 2px solid var(--accent);
+      background: #23251d;
+    }
+
+    .cost-summary h3 {
+      margin: 0 0 18px;
+      font-size: 27px;
+      letter-spacing: -0.05em;
+      line-height: 1.45;
+    }
+
+    .cost-summary p {
+      margin: 0 0 20px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.9;
+    }
+
+    .cost-table-wrap {
+      min-width: 0;
+      overflow-x: auto;
+    }
+
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 12px;
+    }
+
+    .cost-table th,
+    .cost-table td {
+      padding: 17px 14px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .cost-table thead th {
+      border-top: 1px solid var(--accent);
+      background: #29291f;
+      color: #e5c5a0;
+    }
+
+    .cost-table tbody th {
+      font-weight: 600;
+    }
+
+    .cost-table td {
+      color: var(--muted);
+    }
+
+    .cost-table td:nth-child(2) {
+      white-space: nowrap;
+    }
+
+    .cost-note {
+      margin: 18px 0 0;
+      color: #9b9587;
+      font-size: 11px;
+      line-height: 1.9;
+    }
+
+    @media (max-width: 800px) {
+      .opening-grid,
+      .review-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+
+      .opening-placeholder {
+        aspect-ratio: 16 / 10;
+      }
+
+      .cost-layout {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .cost-table th,
+      .cost-table td {
+        padding: 14px 9px;
+        font-size: 11px;
+      }
+
+      .film-frame video {
+        max-height: 65svh;
+      }
+
+      .menu-tools {
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (min-width: 801px) and (max-width: 960px) {
+      header {
+        padding-right: 22px;
+        padding-left: 22px;
+      }
+
+      header .brand {
+        width: 220px;
+      }
+
+      #nav {
+        gap: 15px;
+      }
+
+      #nav a {
+        font-size: 11px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a class="skip" href="#main">본문 바로가기</a>
+
+  <header>
+    <a class="brand" href="#main" aria-label="더바른한끼 홈">
+      <img
+        src="./assets/logo.png"
+        alt="더바른한끼 소문난찐빵&손만두"
+        width="512"
+        height="89"
+      >
+    </a>
+
+    <button
+      class="hamburger"
+      type="button"
+      aria-label="메뉴 열기"
+      aria-expanded="false"
+      aria-controls="nav"
+    >☰</button>
+
+    <nav id="nav" aria-label="주요 메뉴">
+      <a href="#story">한끼 이야기</a>
+      <a href="#openings">오픈 매장</a>
+      <a href="#menu">한끼 메뉴</a>
+      <a href="#franchise">창업 안내</a>
+      <a href="#contact">가맹 문의</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 메인 -->
+    <div class="hero-stage">
+      <section class="hero" id="main" aria-labelledby="hero-title">
+        <div class="hero-photo">
+          <div class="hero-slides" aria-hidden="true">
+            <img
+              class="active"
+              src="./assets/main.jpg"
+              alt=""
+              fetchpriority="high"
+            >
+            <img src="./assets/main-2.jpg" alt="">
+            <img src="./assets/main-3.jpg" alt="">
+          </div>
+        </div>
+
+        <div class="hero-content">
+          <span class="hero-overline reveal">
+            A WARM BITE, A BETTER DAY.
+          </span>
+
+          <p class="kicker reveal">
+            더바른한끼 · 소문난찐빵&손만두
+          </p>
+
+          <h1 id="hero-title" class="reveal">
+            정성을 빚어,<br>
+            <em>따뜻한 한 끼.</em>
+          </h1>
+
+          <p class="hero-sub reveal">
+            포근한 찐빵과 속이 꽉 찬 손만두.<br>
+            일상에 따뜻한 맛을 전합니다.
+          </p>
+
+          <a class="outline-button reveal" href="#menu">
+            한끼 메뉴 만나보기 <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="hero-switcher" aria-label="메인 사진 선택">
+          <button
+            class="selected"
+            type="button"
+            data-slide="0"
+            aria-label="첫 번째 음식 사진"
+            aria-pressed="true"
+          >01</button>
+
+          <button
+            type="button"
+            data-slide="1"
+            aria-label="두 번째 음식 사진"
+            aria-pressed="false"
+          >02</button>
+
+          <button
+            type="button"
+            data-slide="2"
+            aria-label="세 번째 음식 사진"
+            aria-pressed="false"
+          >03</button>
+
+          <button
+            id="hero-play"
+            type="button"
+            aria-label="메인 사진 자동 전환 시작"
+            aria-pressed="false"
+          >▶</button>
+        </div>
+
+        <div class="hero-foot">
+          <span>MADE WITH CARE.</span>
+          <a href="#story">SCROLL DOWN ↓</a>
+          <span>SHARED WITH WARMTH.</span>
+        </div>
+      </section>
+    </div>
+
+    <div class="page-cover">
+
+      <!-- 브랜드 이야기 -->
+      <section id="story" class="story section">
+        <p class="kicker reveal">THE BAREUN HANKKI</p>
+
+        <h2 class="reveal">
+          익숙한 한 입에,<br>
+          <em>우리의 정성을 담다.</em>
+        </h2>
+
+        <p class="lead reveal">
+          찐빵 한 입의 포근함, 손만두 속 가득한 맛.<br>
+          더바른한끼는 따뜻한 음식을 통해 일상을 채웁니다.
+        </p>
+
+        <div class="story-banner photo reveal">
+          <img
+            src="./assets/bun-large.jpg"
+            alt="달콤한 앙금을 채운 찐빵"
+            loading="lazy"
+          >
+        </div>
+
+        <div class="principles">
+          <article class="reveal">
+            <span>01 / MAKE</span>
+            <h3>직접 만듭니다.</h3>
+            <p>찐빵과 만두를 본사에서 직접 생산합니다.</p>
+          </article>
+
+          <article class="reveal">
+            <span>02 / DELIVER</span>
+            <h3>직접 전합니다.</h3>
+            <p>본사에서 매장으로 직접 배송합니다.</p>
+          </article>
+
+          <article class="reveal">
+            <span>03 / TOGETHER</span>
+            <h3>함께 시작합니다.</h3>
+            <p>매장에 맞는 창업 형태를 함께 고민합니다.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- 매장 자료 등록 공간 -->
+      <section id="openings" class="section new-section">
+        <div class="section-heading">
+          <p class="kicker reveal">NEW OPENINGS</p>
+          <h2 class="reveal">
+            우리 동네에 찾아온,<br>
+            <em>따뜻한 한 끼.</em>
+          </h2>
+        </div>
+
+        <div class="opening-grid" aria-label="매장 소식 준비 중">
+          <div class="opening-card reveal" aria-hidden="true">
+            <div class="opening-placeholder"></div>
+            <div class="opening-info">
+              <div class="placeholder-line short"></div>
+              <div class="placeholder-line medium"></div>
+              <div class="placeholder-line long"></div>
+            </div>
+          </div>
+
+          <div class="opening-card reveal" aria-hidden="true">
+            <div class="opening-placeholder"></div>
+            <div class="opening-info">
+              <div class="placeholder-line short"></div>
+              <div class="placeholder-line medium"></div>
+              <div class="placeholder-line long"></div>
+            </div>
+          </div>
+
+          <div class="opening-card reveal" aria-hidden="true">
+            <div class="opening-placeholder"></div>
+            <div class="opening-info">
+              <div class="placeholder-line short"></div>
+              <div class="placeholder-line medium"></div>
+              <div class="placeholder-line long"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 영상 -->
+      <section id="film" class="section film-section">
+        <p class="kicker reveal">HANKKI FILM</p>
+
+        <h2 class="reveal">
+          더바른한끼를,<br>
+          <em>영상으로 만나보세요.</em>
+        </h2>
+
+        <div class="film-frame">
+          <video
+            id="brand-video"
+            width="1280"
+            height="720"
+            muted
+            loop
+            playsinline
+            controls
+            preload="metadata"
+            aria-label="더바른한끼 소개 영상"
+          >
+            <source src="./assets/brand-video.mp4" type="video/mp4">
+            브라우저에서 영상을 재생할 수 없습니다.
+          </video>
+        </div>
+      </section>
+
+      <!-- 메뉴 -->
+      <section id="menu" class="menu section">
+        <p class="kicker reveal">HANKKI SIGNATURE</p>
+
+        <h2 class="reveal">
+          오늘도 생각나는,<br>
+          <em>그 따뜻한 한 입.</em>
+        </h2>
+
+        <p class="lead reveal">
+          부드러운 찐빵부터 속이 꽉 찬 만두까지.
+        </p>
+
+        <div class="menu-tools">
+          <div class="filters" role="group" aria-label="메뉴 분류">
+            <button type="button" data-filter="all" aria-pressed="true">전체</button>
+            <button type="button" data-filter="bun" aria-pressed="false">찐빵</button>
+            <button type="button" data-filter="dumpling" aria-pressed="false">만두</button>
+          </div>
+
+          <div class="arrows">
+            <button id="prev" type="button" aria-label="이전 메뉴">←</button>
+            <button id="next" type="button" aria-label="다음 메뉴">→</button>
+          </div>
+        </div>
+
+        <div class="rail" tabindex="0" aria-label="메뉴 목록">
+          <article class="menu-item" data-category="bun">
+            <button class="product-open" type="button" data-product="mini-bun" aria-label="미니 찐빵 상세 보기">
+              <div class="photo">
+                <img src="./assets/bun.jpg" alt="미니 찐빵" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>SWEET & SOFT</p>
+            <h3>미니 찐빵</h3>
+            <span>부드러운 찐빵 속 달콤한 앙금.</span>
+          </article>
+
+          <article class="menu-item" data-category="bun">
+            <button class="product-open" type="button" data-product="king-bun" aria-label="왕 찐빵 상세 보기">
+              <div class="photo">
+                <img src="./assets/bun-large.jpg" alt="왕 찐빵" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>WARM & GENEROUS</p>
+            <h3>왕 찐빵</h3>
+            <span>포근하고 넉넉하게 즐기는 달콤함.</span>
+          </article>
+
+          <article class="menu-item" data-category="dumpling">
+            <button class="product-open" type="button" data-product="meat" aria-label="수제 고기만두 상세 보기">
+              <div class="photo">
+                <img src="./assets/meat.jpg" alt="수제 고기만두" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>CLASSIC FAVORITE</p>
+            <h3>수제 고기만두</h3>
+            <span>쫄깃한 만두피와 고기 소의 조화.</span>
+          </article>
+
+          <article class="menu-item" data-category="dumpling">
+            <button class="product-open" type="button" data-product="king-meat" aria-label="수제 고기왕만두 상세 보기">
+              <div class="photo">
+                <img src="./assets/king-meat.jpg" alt="수제 고기왕만두" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>FULL OF FLAVOR</p>
+            <h3>수제 고기왕만두</h3>
+            <span>속을 가득 채워 푸짐하게.</span>
+          </article>
+
+          <article class="menu-item" data-category="dumpling">
+            <button class="product-open" type="button" data-product="kimchi" aria-label="수제 김치만두 상세 보기">
+              <div class="photo">
+                <img src="./assets/kimchi.jpg" alt="수제 김치만두" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>A LITTLE SPICY</p>
+            <h3>수제 김치만두</h3>
+            <span>김치의 풍미를 담은 매콤한 한 입.</span>
+          </article>
+
+          <article class="menu-item" data-category="dumpling">
+            <button class="product-open" type="button" data-product="king-kimchi" aria-label="수제 김치왕만두 상세 보기">
+              <div class="photo">
+                <img src="./assets/king-kimchi.jpg" alt="수제 김치왕만두" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>BOLD & GENEROUS</p>
+            <h3>수제 김치왕만두</h3>
+            <span>매콤한 김치 소를 넉넉하게.</span>
+          </article>
+
+          <article class="menu-item" data-category="dumpling">
+            <button class="product-open" type="button" data-product="rice" aria-label="호떡쌀군만두 상세 보기">
+              <div class="photo">
+                <img src="./assets/rice.jpg" alt="호떡쌀군만두" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>CRISP & JUICY</p>
+            <h3>호떡쌀군만두</h3>
+            <span>겉은 바삭하고 속은 촉촉하게.</span>
+          </article>
+
+          <article class="menu-item" data-category="dumpling">
+            <button class="product-open" type="button" data-product="rice-kimchi" aria-label="호떡쌀김치군만두 상세 보기">
+              <div class="photo">
+                <img src="./assets/rice-kimchi.jpg" alt="호떡쌀김치군만두" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>CRISP & SPICY</p>
+            <h3>호떡쌀김치군만두</h3>
+            <span>바삭한 식감에 매콤한 풍미를 더하다.</span>
+          </article>
+
+          <article class="menu-item" data-category="dumpling">
+            <button class="product-open" type="button" data-product="galbi" aria-label="숯불 갈비만두 상세 보기">
+              <div class="photo">
+                <img src="./assets/galbi.jpg" alt="숯불 갈비만두" loading="lazy">
+              </div>
+              <span class="detail-badge">자세히 보기 ↗</span>
+            </button>
+            <p>SAVORY FAVORITE</p>
+            <h3>숯불 갈비만두</h3>
+            <span>달짝지근한 맛으로 즐기는 갈비만두.</span>
+          </article>
+        </div>
+
+        <p class="rail-status" aria-live="polite">전체 메뉴 · 9종</p>
+      </section>
+
+      <section class="wide-banner" aria-labelledby="banner-title">
+        <div class="photo">
+          <img src="./assets/craft.jpg" alt="따뜻한 차와 함께 차린 찐빵" loading="lazy">
+        </div>
+        <div class="banner-copy">
+          <p class="kicker reveal">A LITTLE WARMTH EVERY DAY</p>
+          <h2 id="banner-title" class="reveal">
+            한 입의 온기가,<br>
+            하루의 여유가 되도록.
+          </h2>
+        </div>
+      </section>
+
+      <!-- 현재 생산 시설 -->
+      <section id="stores" class="stores section">
+        <p class="kicker reveal">FROM OUR KITCHEN</p>
+        <h2 class="reveal">
+          좋은 한 끼가<br>
+          <em>시작되는 곳.</em>
+        </h2>
+        <p class="lead reveal">
+          직접 생산하고 배송하며,<br>
+          매장과 식탁을 이어갑니다.
+        </p>
+
+        <div class="factory-grid">
+          <figure class="reveal">
+            <div class="photo">
+              <img src="./assets/factory.jpg" alt="한끼식품 현재 생산 시설 외관" loading="lazy">
+            </div>
+            <figcaption>
+              <span>OUR PRODUCTION</span>
+              <h3>정성을 만드는 공간.</h3>
+              <p>찐빵과 손만두를 직접 생산하며 더바른한끼의 맛을 전합니다.</p>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <!-- 창업 안내 -->
+      <section id="franchise" class="franchise section">
+        <p class="kicker reveal">YOUR NEXT CHAPTER</p>
+        <h2 class="reveal">
+          새로운 시작에,<br>
+          <em>더바른한끼를 더하세요.</em>
+        </h2>
+        <p class="lead reveal">
+          지역 특성과 매장 상황에 맞춰<br>
+          두 가지 창업 형태를 상담해 드립니다.
+        </p>
+
+        <div class="franchise-options">
+          <article class="reveal">
+            <span>TYPE A / BRAND STORE</span>
+            <h3>단독 가맹점</h3>
+            <div class="type-visual type-a" aria-hidden="true">
+              <span>ONLY<br>HANKKI.</span>
+              <i>하나의 브랜드에 집중하는 시작</i>
+            </div>
+            <p>
+              더바른한끼 브랜드를 단독으로 운영하는 매장.<br>
+              우리 동네의 따뜻한 한 끼를 준비합니다.
+            </p>
+            <a class="text-button" href="#contact">단독 가맹점 상담하기 ↗</a>
+          </article>
+
+          <article class="reveal">
+            <span>TYPE B / SHOP IN SHOP</span>
+            <h3>샵인샵</h3>
+            <div class="type-visual type-b" aria-hidden="true">
+              <span>YOUR SPACE.<br>+ HANKKI.</span>
+              <i>지금의 공간에 새로운 메뉴를 더하다</i>
+            </div>
+            <p>
+              기존 운영 매장에 더바른한끼 메뉴를 더하는 방식.<br>
+              내 매장과 어울리는 운영을 함께 고민합니다.
+            </p>
+            <a class="text-button" href="#contact">샵인샵 상담하기 ↗</a>
+          </article>
+        </div>
+      </section>
+
+      <!-- 비용 세부 내용은 추후 수정 -->
+      <section id="cost" class="section cost-section">
+        <p class="kicker reveal">STARTUP GUIDE</p>
+        <h2 class="reveal">
+          시작에 필요한 내용을,<br>
+          <em>차근차근 안내합니다.</em>
+        </h2>
+
+        <div class="cost-layout">
+          <div class="cost-summary reveal">
+            <h3>내 매장에 맞는<br>창업 상담.</h3>
+            <p>
+              매장 면적과 기존 시설을 확인한 후
+              필요한 내용을 상담해 드립니다.
+            </p>
+            <a class="text-button" href="tel:0315444089">
+              031-544-4089 상담하기 ↗
+            </a>
+          </div>
+
+          <div>
+            <div class="cost-table-wrap">
+              <table class="cost-table" aria-label="창업 준비 항목">
+                <thead>
+                  <tr>
+                    <th scope="col">항목</th>
+                    <th scope="col">금액</th>
+                    <th scope="col">내용</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">가맹 관련</th>
+                    <td>상담 안내</td>
+                    <td>계약 조건 및 적용 항목</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">교육</th>
+                    <td>상담 안내</td>
+                    <td>교육 내용과 진행 방식</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">인테리어</th>
+                    <td>상담 안내</td>
+                    <td>면적 및 기존 시설 활용 여부</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">간판·사인물</th>
+                    <td>상담 안내</td>
+                    <td>설치 위치와 제작 범위</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">주방 설비</th>
+                    <td>상담 안내</td>
+                    <td>필요 장비 및 기존 장비 확인</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">초도 물품</th>
+                    <td>상담 안내</td>
+                    <td>메뉴 구성 및 최초 발주 수량</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <p class="cost-note">
+              세부 금액과 적용 조건은 상담 시 확인해 주세요.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 후기 자료 등록 공간 -->
+      <section id="reviews" class="section new-section">
+        <div class="section-heading">
+          <p class="kicker reveal">HANKKI VOICES</p>
+          <h2 class="reveal">
+            한 끼를 맛본 뒤,<br>
+            <em>남겨주신 이야기.</em>
+          </h2>
+        </div>
+
+        <div class="review-grid" aria-label="고객 후기 준비 중">
+          <div class="review-card reveal" aria-hidden="true">
+            <span class="review-quote">“</span>
+            <div class="placeholder-line medium"></div>
+            <div class="placeholder-line long"></div>
+            <div class="placeholder-line medium"></div>
+            <div class="review-photo-placeholder"></div>
+            <div class="placeholder-line short"></div>
+          </div>
+
+          <div class="review-card reveal" aria-hidden="true">
+            <span class="review-quote">“</span>
+            <div class="placeholder-line medium"></div>
+            <div class="placeholder-line long"></div>
+            <div class="placeholder-line medium"></div>
+            <div class="review-photo-placeholder"></div>
+            <div class="placeholder-line short"></div>
+          </div>
+
+          <div class="review-card reveal" aria-hidden="true">
+            <span class="review-quote">“</span>
+            <div class="placeholder-line medium"></div>
+            <div class="placeholder-line long"></div>
+            <div class="placeholder-line medium"></div>
+            <div class="review-photo-placeholder"></div>
+            <div class="placeholder-line short"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 가맹 문의 -->
+      <section id="contact" class="contact section">
+        <div class="contact-heading">
+          <p class="kicker reveal">LET’S START TOGETHER</p>
+          <h2 class="reveal">
+            당신의 새로운 시작,<br>
+            <em>함께 고민하겠습니다.</em>
+          </h2>
+          <a class="big-phone" href="tel:0315444089">031-544-4089 ↗</a>
+          <p>가맹 및 창업 상담은 전화로 편하게 문의해 주세요.</p>
+        </div>
+
+        <form>
+          <p class="notice">
+            입력 내용은 전송·저장되지 않습니다.
+            실제 상담은 전화로 문의해 주세요.
+          </p>
+
+          <div class="form-row">
+            <label>
+              성함
+              <input name="name" autocomplete="name" placeholder="성함" maxlength="40" required>
+            </label>
+            <label>
+              연락처
+              <input type="tel" name="phone" autocomplete="tel" placeholder="010-0000-0000" minlength="8" maxlength="20" required>
+            </label>
+          </div>
+
+          <div class="form-row">
+            <label>
+              희망 지역
+              <input name="region" placeholder="시 / 구 / 동" maxlength="80" required>
+            </label>
+            <label>
+              창업 유형
+              <select name="type">
+                <option value="">상담 후 결정</option>
+                <option value="단독 가맹점">단독 가맹점</option>
+                <option value="샵인샵">샵인샵</option>
+              </select>
+            </label>
+          </div>
+
+          <label>
+            문의 내용
+            <textarea name="message" rows="4" maxlength="1500" placeholder="문의 내용"></textarea>
+          </label>
+
+          <button class="submit" type="submit">
+            입력 내용 확인하기 <span aria-hidden="true">↗</span>
+          </button>
+
+          <p id="status" role="status"></p>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <a class="footer-logo" href="#main">
+      <img src="./assets/brand-symbol.png" alt="더바른한끼" width="80" height="76">
+      <span>소문난찐빵&손만두</span>
+    </a>
+    <div>
+      <p>한끼F&B · 사업자등록번호 127-08-88480</p>
+      <p>경기도 포천시 소흘읍 호국로 778-7, 2층</p>
+      <p>체인점 상담 031-544-4089</p>
+      <small>© HANKKI F&B. ALL RIGHTS RESERVED.</small>
+    </div>
+    <a class="top" href="#main" aria-label="맨 위로">↑</a>
+  </footer>
+
+  <aside class="quick" aria-label="빠른 메뉴">
+    <a href="#menu"><span>MENU</span>메뉴</a>
+    <a href="#openings"><span>STORE</span>매장</a>
+    <a href="#film"><span>FILM</span>영상</a>
+    <a class="orange" href="#contact"><span>JOIN US</span>창업 문의</a>
+  </aside>
+
+  <div class="bottom-bar">
+    <a href="tel:0315444089"><b>가맹 상담</b> 031-544-4089</a>
+    <a href="#contact">함께 시작하기 ↗</a>
+  </div>
+
+  <dialog id="inquiry-dialog" aria-labelledby="inquiry-title">
+    <button class="close-dialog" type="button" aria-label="닫기">×</button>
+    <p class="kicker">CONTACT HANKKI</p>
+    <h2 id="inquiry-title">전화로 문의해 주세요.</h2>
+    <p>입력 내용은 전송·저장되지 않았습니다.</p>
+    <a class="submit" href="tel:0315444089">031-544-4089 전화하기 ↗</a>
+  </dialog>
+
+  <dialog id="product-dialog" aria-labelledby="product-title">
+    <button class="product-close" type="button" aria-label="제품 상세 닫기">×</button>
+    <p class="kicker">HANKKI PRODUCT</p>
+    <h2 id="product-title"></h2>
+    <p id="product-description"></p>
+
+    <div class="product-tabs" role="group" aria-label="제품 이미지 선택">
+      <button type="button" data-side="food">음식 사진</button>
+      <button type="button" data-side="front">포장 앞면</button>
+      <button type="button" data-side="back">제품 표시사항</button>
+    </div>
+
+    <img id="product-image" alt="">
+    <p class="product-note">제품 정보는 포장 표시사항을 확인해 주세요.</p>
+  </dialog>
+
+  <script>
+    /* 영상 자동 재생 */
+    (() => {
+      const video = document.getElementById("brand-video");
+      if (!video) return;
+
+      let inView = false;
+      let manuallyPaused = false;
+      let pendingPlay = false;
+
+      video.muted = true;
+      video.defaultMuted = true;
+
+      function shouldPlay() {
+        return inView && !document.hidden && !manuallyPaused;
+      }
+
+      async function syncVideo() {
+        if (!shouldPlay()) {
+          if (!video.paused) video.pause();
+          return;
+        }
+
+        if (!video.paused || pendingPlay) return;
+
+        pendingPlay = true;
+
+        try {
+          await video.play();
+        } catch (_) {
+          /* 自動再生不可の場合は標準再生ボタンを利用 */
+        } finally {
+          pendingPlay = false;
+
+          if (!shouldPlay() && !video.paused) {
+            video.pause();
+          }
+        }
+      }
+
+      video.addEventListener("pause", () => {
+        if (inView && !document.hidden) {
+          manuallyPaused = true;
+        }
+      });
+
+      video.addEventListener("play", () => {
+        manuallyPaused = false;
+      });
+
+      if ("IntersectionObserver" in window) {
+        const observer = new IntersectionObserver((entries) => {
+          const entry = entries[0];
+          const nextInView =
+            entry.isIntersecting && entry.intersectionRatio >= 0.4;
+
+          if (nextInView === inView) return;
+
+          inView = nextInView;
+
+          if (!inView) manuallyPaused = false;
+
+          syncVideo();
+        }, {
+          threshold: [0, 0.4, 1]
+        });
+
+        observer.observe(video);
+      } else {
+        function checkPosition() {
+          const rect = video.getBoundingClientRect();
+          const visible = Math.max(
+            0,
+            Math.min(rect.bottom, innerHeight) - Math.max(rect.top, 0)
+          );
+
+          const nextInView =
+            rect.height > 0 && visible / rect.height >= 0.4;
+
+          if (nextInView === inView) return;
+
+          inView = nextInView;
+          if (!inView) manuallyPaused = false;
+
+          syncVideo();
+        }
+
+        addEventListener("scroll", checkPosition, { passive: true });
+        addEventListener("resize", checkPosition);
+        video.addEventListener("loadedmetadata", checkPosition);
+        checkPosition();
+      }
+
+      document.addEventListener("visibilitychange", syncVideo);
+    })();
+  </script>
+</body>
+</html>
